@@ -6,6 +6,7 @@ import passport from 'passport'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
 
 require('dotenv').config()
 
@@ -54,7 +55,7 @@ passport.use(new GoogleStrategy({
 // passport.use(new TwitterStrategy({
 //     consumerKey: "",
 //     consumerSecret: "",
-//     callbackURL: ""
+//     callbackURL: "http://localhost:4000/auth/twitter/callback"
 // },
 //     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 //         // Called on successful authentication
@@ -63,6 +64,19 @@ passport.use(new GoogleStrategy({
 //         cb(null, profile)
 //     }
 // ));
+
+passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        // Called on successful authentication
+        //Insert into database
+        console.log(profile)
+        cb(null, profile)
+    }
+));
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
@@ -77,6 +91,16 @@ app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
     passport.authenticate('twitter', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('http://localhost:3000');
+    });
+
+app.get('/auth/github',
+    passport.authenticate('github'));
+
+app.get('/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');

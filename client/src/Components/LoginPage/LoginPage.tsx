@@ -11,7 +11,7 @@ export const LoginPage: React.FC = () => {
     }
 
     const githubLogin = () => {
-        // window.open("http://localhost:4000/auth/google", "_self")
+        window.open("http://localhost:4000/auth/github", "_self")
     }
 
     const twitterLogin = () => {

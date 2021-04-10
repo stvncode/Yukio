@@ -16,20 +16,13 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.DB_USER}:${process.e
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "https://gallant-hodgkin-fb9c52.netlify.app", credentials: true }))
-
-app.set("trust proxy", 1);
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 
 app.use(
     session({
         secret: "secretcode",
         resave: true,
-        saveUninitialized: true,
-        cookie: {
-            sameSite: "none",
-            secure: true,
-            maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
-        }
+        saveUninitialized: true
     }))
 
 
@@ -64,11 +57,15 @@ app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/');
+        res.redirect('http://localhost:3000');
     });
 
 app.get("/", (req, res) => {
     res.send("Hello world")
+})
+
+app.get("/getuser", (req, res) => {
+    res.send(req.user)
 })
 
 app.listen(4000, () => {

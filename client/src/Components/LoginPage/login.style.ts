@@ -4,21 +4,29 @@ export const css = stylesheet({
     googleContainer: {
         display: 'flex',
         alignItems: 'center',
-        justifContent: 'space-between',
-        width: '300px',
+        justifContent: 'flex-end',
+        width: '180px',
         height: '50px',
         background: '#4385f4',
         position: 'relative',
         color: 'white',
         fontSize: '13px',
         cursor: 'pointer',
-        margin: '10px',
-        fontFamily: "Poppins"
+        margin: '10px'
+    },
+    githubContainer: {
+        background: 'rgb(56,56,56)'
+    },
+    twitterContainer: {
+        background: '#00a2fa'
+    },
+    text: {
+        position: 'absolute',
+        right: '10px',
+        fontSize: '0.9rem'
     },
     img: {
-        width: '12.5%',
-        height: '100%',
-        objectFit: 'contain',
+        height: '25px',
         left: '10px',
         borderRadius: '3px',
         position: 'absolute'

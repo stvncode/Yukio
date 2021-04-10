@@ -4,6 +4,8 @@ import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 require('dotenv').config()
 
 const app = express()
@@ -33,6 +35,19 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        // Called on successful authentication
+        //Insert into database
+        console.log(profile)
+        cb(null, profile)
+    }
+));
 
 app.get("/", (req, res) => {
     res.send("Hello world")

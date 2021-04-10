@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
+import User from './User'
+import { IUser } from './types'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -14,22 +16,28 @@ require('dotenv').config()
 
 const app = express()
 
-mongoose.connect(`${process.env.START_MONGODB}${process.env.DB_USER}:${process.env.DB_PASS}${process.env.END_MONGODB}`, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect(`${process.env.START_MONGODB}${process.env.DB_USER}:${process.env.DB_PASS}${process.env.END_MONGODB}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}, () => {
     console.log('Connected to mongoose successfully')
 })
 
 // Middleware
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }))
-
+app.set("trust proxy", 1)
 app.use(
     session({
         secret: "secretcode",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        cookie: {
+            sameSite: "none",
+            secure: true,
+            maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+        }
     }))
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -47,9 +55,21 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        // Called on successful authentication
-        //Insert into database
-        console.log(profile)
+        User.find({ googleId: profile.id }, async (err: Error, doc: IUser) => {
+
+            if (err) {
+                return cb(err, null)
+            }
+
+            if (!doc) {
+                // Create One
+                const newUser = new User({
+                    googleId: profile.id,
+                    username: profile.name.givenName
+                })
+                await newUser.save()
+            }
+        })
         cb(null, profile)
     }
 ));

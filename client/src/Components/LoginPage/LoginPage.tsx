@@ -2,6 +2,7 @@ import React from 'react'
 import googleImage from '../../assets/google.png'
 import githubImage from '../../assets/github.png'
 import twitterImage from '../../assets/twitter.png'
+import facebookImage from '../../assets/fb.png'
 import { css } from './login.style'
 
 export const LoginPage: React.FC = () => {
@@ -42,8 +43,8 @@ export const LoginPage: React.FC = () => {
                     <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
                     <div className={css.twitterText}>Login With Twitter</div>
                 </div>
-                <div className={`${css.googleContainer} ${css.twitterContainer}`} onClick={facebookLogin}>
-                    <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
+                <div className={`${css.googleContainer} ${css.facebookContainer}`} onClick={facebookLogin}>
+                    <img src={facebookImage} alt="Github Icon" className={css.twitterImg} />
                     <div className={css.twitterText}>Login With Facebook</div>
                 </div>
             </div>

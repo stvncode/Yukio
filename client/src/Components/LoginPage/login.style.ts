@@ -19,6 +19,9 @@ export const css = stylesheet({
     twitterContainer: {
         backgroundColor: '#00a2fa'
     },
+    facebookContainer: {
+        backgroundColor: '#3c5a99'
+    },
     text: {
         position: 'absolute',
         right: '14px',

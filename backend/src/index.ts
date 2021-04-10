@@ -36,6 +36,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser((user, done) => {
+    return done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+    return done(null, user)
+})
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -48,6 +56,16 @@ passport.use(new GoogleStrategy({
         cb(null, profile)
     }
 ));
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 
 app.get("/", (req, res) => {
     res.send("Hello world")

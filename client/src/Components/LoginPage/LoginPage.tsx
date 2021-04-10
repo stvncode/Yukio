@@ -14,6 +14,10 @@ export const LoginPage: React.FC = () => {
         window.open("http://localhost:4000/auth/github", "_self")
     }
 
+    // const instagramLogin = () => {
+    //     window.open("http://localhost:4000/auth/instagram", "_self")
+    // }
+
     const twitterLogin = () => {
         // window.location.href = "http://localhost:4000/auth/twitter"
     }

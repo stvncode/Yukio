@@ -12,7 +12,6 @@ export const LoginPage: React.FC = () => {
                     <img src={googleImage} alt="Google Icon" className={css.img} />
                     <div>Login With Google</div>
                 </div>
-
                 {/* <div className={`${css.googleContainer} ${css.githubContainer}`} onClick={githubLogin}>
                     <img src={githubImage} alt="Github Icon" />
                     <p>Login With Github</p>
@@ -22,9 +21,7 @@ export const LoginPage: React.FC = () => {
                     <img src={twitterImage} alt="Twitter Icon" />
                     <p>Login With Twitter</p>
                 </div> */}
-
             </div>
-
         </div>
     )
 }

@@ -14,6 +14,10 @@ export const LoginPage: React.FC = () => {
         window.open("http://localhost:4000/auth/github", "_self")
     }
 
+    const facebookLogin = () => {
+        window.open("http://localhost:4000/auth/facebook", "_self")
+    }
+
     // const instagramLogin = () => {
     //     window.open("http://localhost:4000/auth/instagram", "_self")
     // }
@@ -37,6 +41,10 @@ export const LoginPage: React.FC = () => {
                 <div className={`${css.googleContainer} ${css.twitterContainer}`} onClick={twitterLogin}>
                     <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
                     <div className={css.twitterText}>Login With Twitter</div>
+                </div>
+                <div className={`${css.googleContainer} ${css.twitterContainer}`} onClick={facebookLogin}>
+                    <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
+                    <div className={css.twitterText}>Login With Facebook</div>
                 </div>
             </div>
         </div>

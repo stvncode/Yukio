@@ -1,7 +1,7 @@
 import React from 'react'
-import googleImage from '../../assets/googleImage.png'
-import githubImage from '../../assets/githubImage.png'
-import twitterImage from '../../assets/twitterImage.png'
+import googleImage from '../../assets/google.png'
+import githubImage from '../../assets/github.png'
+import twitterImage from '../../assets/twitter.png'
 import { css } from './login.style'
 
 export const LoginPage: React.FC = () => {
@@ -15,7 +15,7 @@ export const LoginPage: React.FC = () => {
     }
 
     const twitterLogin = () => {
-        // window.open("http://localhost:4000/auth/google", "_self")
+        // window.location.href = "http://localhost:4000/auth/twitter"
     }
 
     return (
@@ -31,8 +31,8 @@ export const LoginPage: React.FC = () => {
                     <div className={css.text}>Login With Github</div>
                 </div>
                 <div className={`${css.googleContainer} ${css.twitterContainer}`} onClick={twitterLogin}>
-                    <img src={twitterImage} alt="Github Icon" className={css.img} />
-                    <div className={css.text}>Login With Twitter</div>
+                    <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
+                    <div className={css.twitterText}>Login With Twitter</div>
                 </div>
             </div>
         </div>

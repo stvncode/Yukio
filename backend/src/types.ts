@@ -3,5 +3,7 @@ export interface IUser {
     facebookId?: string,
     twitterId?: string,
     githubId?: string,
-    username: string
+    username: string,
+    __v: number;
+    _id: string;
 }

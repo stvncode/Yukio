@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+
+import mongoose from 'mongoose';
 
 const user = new mongoose.Schema({
     googleId: {
@@ -9,11 +10,11 @@ const user = new mongoose.Schema({
         required: false,
         type: String
     },
-    facebookId: {
+    githubId: {
         required: false,
         type: String
     },
-    githubId: {
+    facebookId: {
         required: false,
         type: String
     },
@@ -21,6 +22,6 @@ const user = new mongoose.Schema({
         required: true,
         type: String
     }
-})
+});
 
 export default mongoose.model("User", user);

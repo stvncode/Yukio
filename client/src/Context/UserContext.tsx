@@ -10,6 +10,7 @@ export const UserContext = (props: any) => {
 
     useEffect(() => {
         axios.get("http://localhost:4000/getuser", { withCredentials: true }).then((res: AxiosResponse) => {
+            console.log(res)
             if (res.data) {
                 setUserObject(res.data);
             }

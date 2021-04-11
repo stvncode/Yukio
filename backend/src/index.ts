@@ -26,27 +26,26 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.DB_USER}:${process.e
 // Middleware
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }))
-app.set("trust proxy", 1)
+
 app.use(
     session({
         secret: "secretcode",
         resave: true,
         saveUninitialized: true,
-        cookie: {
-            sameSite: "none",
-            secure: true,
-            maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
-        }
     }))
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
-    return done(null, user)
-})
+passport.serializeUser((user: IUser, done: any) => {
+    return done(null, user._id);
+});
 
-passport.deserializeUser((user, done) => {
-    return done(null, user)
+passport.deserializeUser((id: string, done: any) => {
+
+    User.findById(id, (err: Error, doc: IUser) => {
+        // Whatever we return goes to the client and binds to the req.user property
+        return done(null, doc);
+    })
 })
 
 passport.use(new GoogleStrategy({
@@ -54,13 +53,12 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        User.find({ googleId: profile.id }, async (err: Error, doc: IUser) => {
+    function (_: any, __: any, profile: any, cb: any) {
+        User.findOne({ googleId: profile.id }, async (err: Error, doc: IUser) => {
 
             if (err) {
                 return cb(err, null)
             }
-
             if (!doc) {
                 // Create One
                 const newUser = new User({
@@ -68,22 +66,37 @@ passport.use(new GoogleStrategy({
                     username: profile.name.givenName
                 })
                 await newUser.save()
+                cb(null, newUser)
             }
+            cb(null, doc)
         })
-        cb(null, profile)
     }
 ));
+
+console.log()
 
 // passport.use(new TwitterStrategy({
 //     consumerKey: "",
 //     consumerSecret: "",
 //     callbackURL: "http://localhost:4000/auth/twitter/callback"
 // },
-//     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-//         // Called on successful authentication
-//         //Insert into database
-//         console.log(profile)
-//         cb(null, profile)
+//     function (_: any, __: any, profile: any, cb: any) {
+//         User.findOne({ twiitterId: profile.id }, async (err: Error, doc: IUser) => {
+
+//             if (err) {
+//                 return cb(err, null)
+//             }
+//             if (!doc) {
+//                 // Create One
+//                 const newUser = new User({
+//                     twitterId: profile.id,
+//                     username: profile.username
+//                 })
+//                 await newUser.save()
+//             cb(null, newUser)
+// }
+// cb(null, doc)
+//         })
 //     }
 // ));
 
@@ -92,11 +105,24 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: process.env.GITHUB_CALLBACK
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        // Called on successful authentication
-        //Insert into database
-        console.log(profile)
-        cb(null, profile)
+    function (_: any, __: any, profile: any, cb: any) {
+        User.findOne({ githubId: profile.id }, async (err: Error, doc: IUser) => {
+
+            if (err) {
+                return cb(err, null)
+            }
+
+            if (!doc) {
+                // Create One
+                const newUser = new User({
+                    githubId: profile.id,
+                    username: profile.username
+                })
+                await newUser.save()
+                cb(null, newUser)
+            }
+            cb(null, doc)
+        })
     }
 ));
 
@@ -105,7 +131,7 @@ passport.use(new GitHubStrategy({
 //     clientSecret: process.env.INSTA_CLIENT_SECRET,
 //     callbackURL: "http://localhost:4000/auth/instagram/callback"
 // },
-//     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+//     function (_: any, __: any, profile: any, cb: any) {
 //         // Called on successful authentication
 //         //Insert into database
 //         console.log(profile)
@@ -118,11 +144,24 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:4000/auth/facebook/callback"
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        // Called on successful authentication
-        //Insert into database
-        console.log(profile)
-        cb(null, profile)
+    function (_: any, __: any, profile: any, cb: any) {
+        User.findOne({ facebookId: profile.id }, async (err: Error, doc: IUser) => {
+
+            if (err) {
+                return cb(err, null)
+            }
+
+            if (!doc) {
+                // Create One
+                const newUser = new User({
+                    facebookId: profile.id,
+                    username: profile.displayName
+                })
+                await newUser.save()
+                cb(null, newUser)
+            }
+            cb(null, doc)
+        })
     }
 ));
 

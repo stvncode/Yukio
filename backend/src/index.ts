@@ -129,7 +129,7 @@ passport.use(new GitHubStrategy({
 // passport.use(new InstagramStrategy({
 //     clientID: process.env.INSTA_CLIENT_ID,
 //     clientSecret: process.env.INSTA_CLIENT_SECRET,
-//     callbackURL: "http://localhost:4000/auth/instagram/callback"
+//     callbackURL: "/auth/instagram/callback"
 // },
 //     function (_: any, __: any, profile: any, cb: any) {
 //         // Called on successful authentication
@@ -142,7 +142,7 @@ passport.use(new GitHubStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:4000/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback"
 },
     function (_: any, __: any, profile: any, cb: any) {
         User.findOne({ facebookId: profile.id }, async (err: Error, doc: IUser) => {

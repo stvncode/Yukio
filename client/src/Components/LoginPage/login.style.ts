@@ -4,7 +4,7 @@ export const css = stylesheet({
     googleContainer: {
         display: 'flex',
         alignItems: 'center',
-        width: '230px',
+        width: '290px',
         height: '50px',
         background: '#4385f4',
         position: 'relative',
@@ -14,27 +14,46 @@ export const css = stylesheet({
         margin: '10px'
     },
     githubContainer: {
-        backgroundColor: 'rgb(56,56,56)'
+        background: 'rgb(56,56,56)'
     },
     twitterContainer: {
-        backgroundColor: '#00a2fa'
+        background: '#00a2fa'
     },
     facebookContainer: {
-        backgroundColor: '#3c5a99'
+        background: '#3c5a99'
+    },
+    instagramContainer: {
+        background: 'linear-gradient(#fb009f,#fe0202)'
     },
     text: {
         position: 'absolute',
-        right: '14px',
+        right: '40px',
         fontSize: '0.9rem'
     },
     twitterText: {
         position: 'absolute',
-        right: '5px',
+        right: '32px',
+        fontSize: '0.9rem'
+    },
+    facebookText: {
+        position: 'absolute',
+        right: '24px',
+        fontSize: '0.9rem'
+    },
+    instagramText: {
+        position: 'absolute',
+        right: '16px',
         fontSize: '0.9rem'
     },
     twitterImg: {
         height: '25px',
         left: '1px',
+        borderRadius: '3px',
+        position: 'absolute'
+    },
+    facebookImg: {
+        height: '25px',
+        left: '6px',
         borderRadius: '3px',
         position: 'absolute'
     },

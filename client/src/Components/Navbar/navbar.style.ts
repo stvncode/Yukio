@@ -19,5 +19,8 @@ export const css = stylesheet({
     link: {
         textDecoration: 'none',
         color: 'white'
+    },
+    menu: {
+        cursor: 'pointer'
     }
 })

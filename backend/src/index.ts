@@ -75,30 +75,30 @@ passport.use(new GoogleStrategy({
 
 console.log()
 
-// passport.use(new TwitterStrategy({
-//     consumerKey: "",
-//     consumerSecret: "",
-//     callbackURL: "http://localhost:4000/auth/twitter/callback"
-// },
-//     function (_: any, __: any, profile: any, cb: any) {
-//         User.findOne({ twiitterId: profile.id }, async (err: Error, doc: IUser) => {
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWITTER_CLIENT_ID,
+    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK
+},
+    function (_: any, __: any, profile: any, cb: any) {
+        User.findOne({ twitterId: profile.id }, async (err: Error, doc: IUser) => {
 
-//             if (err) {
-//                 return cb(err, null)
-//             }
-//             if (!doc) {
-//                 // Create One
-//                 const newUser = new User({
-//                     twitterId: profile.id,
-//                     username: profile.username
-//                 })
-//                 await newUser.save()
-//             cb(null, newUser)
-// }
-// cb(null, doc)
-//         })
-//     }
-// ));
+            if (err) {
+                return cb(err, null)
+            }
+            if (!doc) {
+                // Create One
+                const newUser = new User({
+                    twitterId: profile.id,
+                    username: profile.username
+                })
+                await newUser.save()
+            cb(null, newUser)
+}
+cb(null, doc)
+        })
+    }
+));
 
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,

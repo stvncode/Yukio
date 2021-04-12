@@ -1,0 +1,63 @@
+{
+	// Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+	// same ids are connected.
+	// Example:
+	"Morphic opaque": {
+	  "prefix": "moo",
+	  "body": [
+		"export interface $1 extends AType<typeof $1_> {}",
+		"export interface $1Raw extends EType<typeof $1_> {}",
+		"export const $1 = AsOpaque<$1Raw, $1>()($1_)"
+	  ],
+	  "description": "Defines a Morphic opaque signature"
+	},
+	"Morphic interface": {
+	  "prefix": "moi",
+	  "body": [
+		"const $1_ = summon(F => F.interface({ $0 }, '$1'))",
+		"export interface $1 extends AType<typeof $1_> {}",
+		"export interface $1Raw extends EType<typeof $1_> {}",
+		"export const $1 = AsOpaque<$1Raw, $1>()($1_)"
+	  ],
+	  "description": "Defines a Morphic interface"
+	},
+	"Morphic opaque for tagged unions": {
+	  "prefix": "mot",
+	  "body": [
+		"export type $1 = AOfMorhpADT<typeof $1>"
+	  ],
+	  "description": "Defines a Morphic Tagged union opaque signature"
+	},
+	"Service matechs": {
+	  "prefix": "ser",
+	  "body": [
+		"import { effect as T, service as Service } from '@matechs/core'",
+		"",
+		"export const $1URI = '$1'",
+		"",
+		"export interface $1Service {",
+		"  $2: $0",
+		"}",
+		"",
+		"export interface With$1 {",
+		"  [$1URI]: $1Service",
+		"}",
+		"",
+		"export const $1Spec = Service.define<With$1>({",
+		"  [$1URI]: {",
+		"    $2: Service.cn() // or Service.fn()",
+		"  }",
+		"})",
+		"",
+		"export interface $1 extends Service.TypeOf<typeof $1Spec> {}",
+		"export const $1 = Service.opaque<$1>()($1Spec)",
+		"",
+		"export const {",
+		"  [$1URI]: { $2 }",
+		"} = Service.access($1)",
+	  ],
+	  "description": "Matechs service definition"
+	}
+  }

@@ -6,7 +6,7 @@ const unionizeTagOptions = {
 }
 const ofType = ofTypeForTag('type')
 
-const unionize = <Record extends uz.MultiValueRec>(record: Record) =>
+const unionize = <R extends string>(record: uz.MultiValueRec<R>) =>
     uz.unionize(record, unionizeTagOptions)
 
 const oneOf = <UT extends uz.UnionTypes<any, any>>(u: UT) => <

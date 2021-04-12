@@ -1,15 +1,15 @@
-import { Action } from '../prelude/redux/redux'
-import { ofType, unionize, UnionOf } from '../prelude/unionize/unionize-usage'
+import { AType,EType } from '@morphic-ts/summoners/lib'
+import { AsOpaque, summon, tagged } from '../framework/summoner'
 
-export interface ShowButton extends Action<'ShowButton'> { }
-export const showButton = ofType<ShowButton>('ShowButton')
+const ShowButton_ = summon(F => F.interface({ type: F.stringLiteral('ShowButton') }, 'ShowButton'))
+export interface ShowButton extends AType<typeof ShowButton_> {}
+export interface ShowButtonRaw extends EType<typeof ShowButton_> {}
+export const ShowButton = AsOpaque<ShowButtonRaw, ShowButton>()(ShowButton_)
 
-export interface DisabledButton extends Action<'DisabledButton'> { }
-export const disabledButton = ofType<DisabledButton>('DisabledButton')
+const DisabledButton_ = summon(F => F.interface({  type: F.stringLiteral('DisabledButton') }, 'DisabledButton'))
+export interface DisabledButton extends AType<typeof DisabledButton_> {}
+export interface DisabledButtonRaw extends EType<typeof DisabledButton_> {}
+export const DisabledButton = AsOpaque<DisabledButtonRaw, DisabledButton>()(DisabledButton_)
 
-export const yukioActions = unionize({
-    ...showButton,
-    ...disabledButton
-})
-
-export type YukioActions = UnionOf<typeof yukioActions>
+export const YukioActions = tagged('type')({ShowButton, DisabledButton})
+export type YukioActions = AType<typeof YukioActions>

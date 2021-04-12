@@ -28,9 +28,9 @@ export const LoginPage: React.FC = () => {
     //     window.open("http://localhost:4000/auth/instagram", "_self")
     // }
 
-    // const twitterLogin = () => {
-    //     window.location.href = "http://localhost:4000/auth/twitter"
-    // }
+    const twitterLogin = () => {
+        window.location.href = "http://localhost:4000/auth/twitter"
+    }
 
     return (
         <div className={css.loginPage}>
@@ -44,7 +44,7 @@ export const LoginPage: React.FC = () => {
                     <img src={githubImage} alt="Github Icon" className={css.img} />
                     <div className={css.text}>{msg.github}</div>
                 </div>
-                <div className={`${css.googleContainer} ${css.twitterContainer}`} >
+                <div className={`${css.googleContainer} ${css.twitterContainer}`} onClick={twitterLogin}>
                     <img src={twitterImage} alt="Github Icon" className={css.twitterImg} />
                     <div className={css.twitterText}>{msg.twitter}</div>
                 </div>

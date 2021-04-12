@@ -13,7 +13,6 @@ export const HomePage: React.FC = () => {
     const msg = useTranslator(HomeMsg)
     const isShow = useSelector(yukioSelector.get)
 
-    console.log('AA', isShow)
     const dispatchShowButton = useMemoDispatch(YukioActions.make({ type: 'ShowButton' }))
 
     return (
@@ -23,7 +22,6 @@ export const HomePage: React.FC = () => {
                     <h1>{msg.welcomeBack} {user.username}</h1>
                 ) : <h1>{msg.welcome}</h1>
             }
-            <button onClick={dispatchShowButton}>coucou</button>
-        </div >
+        </div>
     )
 }

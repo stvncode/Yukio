@@ -4,7 +4,8 @@ import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import User from './User'
-import { IUser } from './types'
+import { IFood, IUser } from './types'
+import Food from './Food'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -19,9 +20,14 @@ const app = express()
 mongoose.connect(`${process.env.START_MONGODB}${process.env.DB_USER}:${process.env.DB_PASS}${process.env.END_MONGODB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, () => {
-    console.log('Connected to mongoose successfully')
 })
+
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log("db connected");
+});
 
 // Middleware
 app.use(express.json());
@@ -93,9 +99,9 @@ passport.use(new TwitterStrategy({
                     username: profile.username
                 })
                 await newUser.save()
-            cb(null, newUser)
-}
-cb(null, doc)
+                cb(null, newUser)
+            }
+            cb(null, doc)
         })
     }
 ));
@@ -226,6 +232,23 @@ app.get("/auth/logout", (req, res) => {
         req.logout();
         res.send("done");
     }
+})
+
+app.get('/addFoodTypes', (req, res) => {
+    const food = new Food({
+        types: 'Fish and seafood'
+    })
+    food.save().then((result) => {
+        res.send(result)
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
+app.get('/getAllFoodTypes', (req, res) => {
+    Food.find().then((result) => {
+        res.send(result)
+    }).catch(err => console.log(err))
 })
 
 app.listen(4000, () => {

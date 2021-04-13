@@ -7,3 +7,7 @@ export interface IUser {
     __v: number;
     _id: string;
 }
+
+export interface IFood {
+    types?: string
+}

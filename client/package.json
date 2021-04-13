@@ -39,7 +39,7 @@
     "rxjs": "^6.6.7",
     "simplebar-react": "^2.3.0",
     "typed-intl": "^1.0.3",
-    "typescript": "^4.1.2",
+    "typescript": "^4.2.4",
     "typestyle": "^2.1.0",
     "unionize": "^3.1.0",
     "uuid": "^8.3.2",

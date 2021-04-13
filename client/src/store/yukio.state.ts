@@ -7,5 +7,5 @@ export interface YukioState {
 export const yukioLens = Lens.fromProp<YukioState>()('yukioState')
 
 export const initialYukioState: YukioState = {
-    yukioState: false
+    yukioState: true
 }

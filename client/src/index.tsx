@@ -5,13 +5,14 @@ import { App } from './App';
 import { UserContext } from './Context/UserContext';
 import './index.css';
 import { store } from './store/store';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <UserContext>
-      <App />
-    </UserContext>
+      <UserContext>
+        <App />
+      </UserContext>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

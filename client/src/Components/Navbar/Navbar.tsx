@@ -6,6 +6,8 @@ import { myContext } from '../../Context/UserContext'
 import { IUser } from '../../types/maintypes'
 import { useTranslator } from '../../hooks/use-translator'
 import { NavbarMsg } from './navbar.msg'
+import { Button, Dropdown, Menu } from 'antd'
+import { MenuOutlined, UserOutlined } from '@ant-design/icons';
 
 export const Navbar: React.FC = () => {
 
@@ -20,11 +22,26 @@ export const Navbar: React.FC = () => {
         })
     }
 
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                1st menu item
+          </Menu.Item>
+            <Menu.Item>
+                2nd menu item
+          </Menu.Item>
+        </Menu>
+    );
+
+
     return (
         <div className={css.container} >
             <div className={css.navbar}>
                 <Link to='/' className={css.link}>{msg.home}</Link>
                 {user ? <div className={css.menu} onClick={logout}>{msg.logout}</div> : <Link to='login' className={css.link}>{msg.login}</Link>}
+                <Dropdown overlay={menu} trigger={['click']}>
+                    <Button icon={<MenuOutlined />} shape="round"><UserOutlined /></Button>
+                </Dropdown>
             </div>
         </div>
     )

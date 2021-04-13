@@ -1,24 +1,21 @@
-import React, { useContext, useState } from 'react'
+import axios from 'axios'
+import React, { useContext } from 'react'
 import { myContext } from '../../Context/UserContext'
 import { useTranslator } from '../../hooks/use-translator'
-import { useMemoDispatch } from '../../hooks/useMemoDispatch'
-import { YukioActions } from '../../store/yukio.actions'
+import { Button } from '../../OwnComponents/button/Button'
 import { IUser } from '../../types/maintypes'
 import { HomeMsg } from './home.msg'
-import { useSelector } from 'react-redux'
-import { yukioSelector } from '../../selectors/selectors'
-import { Button } from '../../OwnComponents/button/Button'
-import { LoginPage } from '../LoginPage/LoginPage'
-import { Modal } from '../../OwnComponents/modal/Modal'
 
 export const HomePage: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false)
 
     const user = useContext(myContext) as IUser
     const msg = useTranslator(HomeMsg)
-    const isShow = useSelector(yukioSelector.get)
 
-    const dispatchShowButton = useMemoDispatch(YukioActions.make({ type: 'ShowButton' }))
+    const foodTypes = () => {
+        axios.get('http://localhost:4000/getAllFoodTypes').then(res => {
+            console.log(res)
+        })
+    }
 
     return (
         <>
@@ -29,8 +26,7 @@ export const HomePage: React.FC = () => {
                     ) : <h1>{msg.welcome}</h1>
                 }
             </div>
-            <Button onClick={() => setIsOpen(true)}>Try to open modal when sign in</Button>
-            <Modal destroyOnClose visible={isOpen} onCancel={() => setIsOpen(false)}>coucou</Modal>
+            <Button onClick={foodTypes}>Get food</Button>
         </>
     )
 }

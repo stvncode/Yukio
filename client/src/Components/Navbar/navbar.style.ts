@@ -22,5 +22,8 @@ export const css = stylesheet({
     },
     menu: {
         cursor: 'pointer'
+    },
+    dropdown: {
+        width: '12rem'
     }
 })

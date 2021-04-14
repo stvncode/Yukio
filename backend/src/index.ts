@@ -1,4 +1,4 @@
-import express from 'express'
+import express, {Request, Response} from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import session from 'express-session'
@@ -173,7 +173,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
+    function (_, res: Response) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');
     });
@@ -182,7 +182,7 @@ app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
     passport.authenticate('twitter', { failureRedirect: '/login' }),
-    function (req, res) {
+    function (_, res: Response) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');
     });
@@ -192,7 +192,7 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
-    function (req, res) {
+    function (_, res: Response) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');
     });
@@ -202,7 +202,7 @@ app.get('/auth/instagram',
 
 app.get('/auth/instagram/callback',
     passport.authenticate('instagram', { failureRedirect: '/login' }),
-    function (req, res) {
+    function (_, res: Response) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');
     });
@@ -212,44 +212,33 @@ app.get('/auth/facebook',
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function (req, res) {
+    function (_, res: Response) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000');
     });
 
-app.get("/", (req, res) => {
+app.get("/", (_, res: Response) => {
     res.send("Hello world")
 })
 
-app.get("/getuser", (req, res) => {
+app.get("/getuser", (req: Request, res: Response) => {
     res.send(req.user)
 })
 
-app.get("/auth/logout", (req, res) => {
+app.get("/auth/logout", (req: Request, res: Response) => {
     if (req.user) {
         req.logout();
         res.send("done");
     }
 })
 
-app.get('/addFoodTypes', (req, res) => {
-    const food = new Food({
-        types: 'Fish and seafood'
-    })
-    food.save().then((result) => {
-        res.send(result)
-    }).catch((err) => {
-        console.log(err)
-    })
-})
-
-app.get('/getAllFoodTypes', (req, res) => {
+app.get('/getAllFoodTypes', (_, res: Response) => {
     Food.find().then((result) => {
         res.send(result)
     }).catch(err => console.log(err))
 })
 
-app.post('/createFood', (req,res) => {
+app.post('/createFood', (req: Request, _) => {
     const types = req.body.types
     const newFood = new Food({
         types

@@ -18,7 +18,6 @@ export const HomePage: React.FC = () => {
             setTypes(res.data)
         })
     }
-    console.log(types)
 
     return (
         <>
@@ -29,10 +28,10 @@ export const HomePage: React.FC = () => {
                     ) : <h1>{msg.welcome}</h1>
                 }
             </div>
-            <Button onClick={foodTypes}>Get food</Button>
+            <Button onClick={foodTypes}>{msg.food}</Button>
             <div>
-                {types.map((t: IFood) => 
-                    <div>{t.types}</div>
+                {types.map((t: IFood, index: number) => 
+                    <div key={index}>{t.types}</div>
                 )}
             </div>
         </>

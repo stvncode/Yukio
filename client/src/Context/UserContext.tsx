@@ -12,7 +12,7 @@ export const UserContext = (props: any) => {
         axios.get("http://localhost:4000/getuser", { withCredentials: true }).then((res: AxiosResponse) => {
             console.log(res)
             if (res.data) {
-                setUserObject(res.data);
+                setUserObject(res.data)
             }
         })
     }, [])

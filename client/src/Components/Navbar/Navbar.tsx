@@ -25,10 +25,10 @@ export const Navbar: React.FC = () => {
     const menu = (
         <Menu>
             <Menu.Item>
-                1st menu item
+                Profile
           </Menu.Item>
             <Menu.Item>
-                2nd menu item
+                Déconnexion
           </Menu.Item>
         </Menu>
     );

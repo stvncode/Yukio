@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { myContext } from '../../Context/UserContext'
 import { useTranslator } from '../../hooks/use-translator'
 import { Button } from '../../OwnComponents/button/Button'
-import { IUser } from '../../types/maintypes'
+import { IFood, IUser } from '../../types/maintypes'
 import { HomeMsg } from './home.msg'
 
 export const HomePage: React.FC = () => {
@@ -11,11 +11,14 @@ export const HomePage: React.FC = () => {
     const user = useContext(myContext) as IUser
     const msg = useTranslator(HomeMsg)
 
+    const [types, setTypes] = useState([])
+
     const foodTypes = () => {
         axios.get('http://localhost:4000/getAllFoodTypes').then(res => {
-            console.log(res)
+            setTypes(res.data)
         })
     }
+    console.log(types)
 
     return (
         <>
@@ -27,6 +30,11 @@ export const HomePage: React.FC = () => {
                 }
             </div>
             <Button onClick={foodTypes}>Get food</Button>
+            <div>
+                {types.map((t: IFood) => 
+                    <div>{t.types}</div>
+                )}
+            </div>
         </>
     )
 }

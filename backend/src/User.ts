@@ -20,6 +20,10 @@ const user = new mongoose.Schema({
     username: {
         required: true,
         type: String
+    },
+    isAdmin: {
+        required: false,
+        type: Boolean
     }
 });
 

@@ -79,8 +79,6 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-console.log()
-
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_CLIENT_ID,
     consumerSecret: process.env.TWITTER_CLIENT_SECRET,
@@ -249,6 +247,14 @@ app.get('/getAllFoodTypes', (req, res) => {
     Food.find().then((result) => {
         res.send(result)
     }).catch(err => console.log(err))
+})
+
+app.post('/createFood', (req,res) => {
+    const types = req.body.types
+    const newFood = new Food({
+        types
+    })
+    newFood.save()
 })
 
 app.listen(4000, () => {

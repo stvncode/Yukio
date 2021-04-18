@@ -6,5 +6,5 @@ export const updateProfile = (data: IProfile) => {
         firstName: data.firstName,
         lastName: data.lastName
     }
-    axios.post('http://localhost:4000/updateProfile', newProfile)
+    axios.post('http://localhost:4000/updateProfile', newProfile, { withCredentials: true })
 }

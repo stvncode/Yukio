@@ -1,10 +1,11 @@
-import express, {Request, Response} from 'express'
+import express, { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import User from './User'
 import { IUser } from './types'
+import uniqid from 'uniqid'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -60,20 +61,20 @@ passport.use(new GoogleStrategy({
 },
     function (_: any, __: any, profile: any, cb: any) {
         User.findOne({ googleId: profile.id }, async (err: Error, doc: IUser) => {
-
             if (err) {
                 return cb(err, null)
             }
             if (!doc) {
                 // Create One
                 const newUser = new User({
+                    generalId: uniqid('google-'),
                     googleId: profile.id,
                     username: profile.name.givenName
                 })
                 await newUser.save()
-                cb(null, newUser)
+                return cb(null, newUser)
             }
-            cb(null, doc)
+            return cb(null, doc)
         })
     }
 ));
@@ -85,20 +86,20 @@ passport.use(new TwitterStrategy({
 },
     function (_: any, __: any, profile: any, cb: any) {
         User.findOne({ twitterId: profile.id }, async (err: Error, doc: IUser) => {
-
             if (err) {
                 return cb(err, null)
             }
             if (!doc) {
                 // Create One
                 const newUser = new User({
+                    generalId: uniqid('twitter-'),
                     twitterId: profile.id,
                     username: profile.username
                 })
                 await newUser.save()
-                cb(null, newUser)
+                return cb(null, newUser)
             }
-            cb(null, doc)
+            return cb(null, doc)
         })
     }
 ));
@@ -118,13 +119,14 @@ passport.use(new GitHubStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
+                    generalId: uniqid('github-'),
                     githubId: profile.id,
                     username: profile.username
                 })
                 await newUser.save()
-                cb(null, newUser)
+                return cb(null, newUser)
             }
-            cb(null, doc)
+            return cb(null, doc)
         })
     }
 ));
@@ -157,13 +159,14 @@ passport.use(new FacebookStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
+                    generalId: uniqid('facebook-'),
                     facebookId: profile.id,
                     username: profile.displayName
                 })
                 await newUser.save()
-                cb(null, newUser)
+                return cb(null, newUser)
             }
-            cb(null, doc)
+            return cb(null, doc)
         })
     }
 ));
@@ -222,7 +225,6 @@ app.get("/", (_, res: Response) => {
 
 app.get("/getuser", (req: Request, res: Response) => {
     res.send(req.user)
-    console.log(req.user)
 })
 
 app.get("/auth/logout", (req: Request, res: Response) => {
@@ -234,8 +236,9 @@ app.get("/auth/logout", (req: Request, res: Response) => {
 
 app.post('/updateProfile', (req: Request, _) => {
     const profile = req.body
-    
-    User.findOneAndUpdate({githubId: '25082266'}, {
+    const user: any = req?.user
+    //TODO: Fix pb on update
+    User.findOneAndUpdate({ generalId: user?.generalId }, {
         profile: {
             firstName: profile.firstName,
             lastName: profile.lastName

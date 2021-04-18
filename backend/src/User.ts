@@ -12,6 +12,10 @@ const profile = new mongoose.Schema({
 });
 
 const user = new mongoose.Schema({
+    generalId: {
+        required: true,
+        type: String
+    },
     googleId: {
         required: false,
         type: String
@@ -36,11 +40,7 @@ const user = new mongoose.Schema({
         required: false,
         type: Boolean
     },
-    profile: profile,
-    img: {
-            data: Buffer,
-            contentType: String
-         }
+    profile: profile
 });
 
 export default mongoose.model("User", user);

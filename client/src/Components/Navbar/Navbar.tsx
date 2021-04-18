@@ -24,12 +24,28 @@ export const Navbar: React.FC = () => {
 
     const menu = (
         <Menu>
-            <Menu.Item>
-                Profile
-          </Menu.Item>
-            <Menu.Item>
-                Déconnexion
-          </Menu.Item>
+            {user ?
+                <>
+                    <Menu.Item>
+                        <Link to='/account'>{msg.account}</Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Link to='help'>{msg.help}</Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <div className={css.menu} onClick={logout}>{msg.logout}</div>
+                    </Menu.Item>
+                </>
+                :
+                <>
+                    <Menu.Item>
+                        <Link to='login'>{msg.login}</Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Link to='help'>{msg.help}</Link>
+                    </Menu.Item>
+                </>
+            }
         </Menu>
     );
 
@@ -38,7 +54,6 @@ export const Navbar: React.FC = () => {
         <div className={css.container} >
             <div className={css.navbar}>
                 <Link to='/' className={css.link}>{msg.home}</Link>
-                {user ? <div className={css.menu} onClick={logout}>{msg.logout}</div> : <Link to='login' className={css.link}>{msg.login}</Link>}
                 {user?.isAdmin ? <Link to='/admin' className={css.link}>{msg.admin}</Link> : null}
                 <Dropdown overlay={menu} trigger={['click']} placement="bottomRight" overlayClassName={css.dropdown}>
                     <Button icon={<MenuOutlined />} shape="round"><UserOutlined /></Button>

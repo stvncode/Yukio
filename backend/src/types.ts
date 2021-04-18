@@ -1,4 +1,5 @@
 export interface IUser {
+    generalId: String,
     googleId?: string,
     facebookId?: string,
     twitterId?: string,
@@ -11,6 +12,6 @@ export interface IUser {
 }
 
 export interface IProfile {
-    firstName: string,
-    lastName: string
+    firstName?: string,
+    lastName?: string
 }

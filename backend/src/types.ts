@@ -5,10 +5,12 @@ export interface IUser {
     githubId?: string,
     username: string,
     isAdmin?: boolean,
+    profile?: IProfile,
     __v: number;
     _id: string;
 }
 
-export interface IFood {
-    types?: string
+export interface IProfile {
+    firstName: string,
+    lastName: string
 }

@@ -1,5 +1,16 @@
 import mongoose from 'mongoose';
 
+const profile = new mongoose.Schema({
+    firstName: {
+        required: false,
+        type: String
+    },
+    lastName: {
+        required: false,
+        type: String
+    }
+});
+
 const user = new mongoose.Schema({
     googleId: {
         required: false,
@@ -24,7 +35,12 @@ const user = new mongoose.Schema({
     isAdmin: {
         required: false,
         type: Boolean
-    }
+    },
+    profile: profile,
+    img: {
+            data: Buffer,
+            contentType: String
+         }
 });
 
 export default mongoose.model("User", user);

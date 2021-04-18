@@ -4,8 +4,7 @@ import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import User from './User'
-import { IFood, IUser } from './types'
-import Food from './Food'
+import { IUser } from './types'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -223,6 +222,7 @@ app.get("/", (_, res: Response) => {
 
 app.get("/getuser", (req: Request, res: Response) => {
     res.send(req.user)
+    console.log(req.user)
 })
 
 app.get("/auth/logout", (req: Request, res: Response) => {
@@ -232,18 +232,15 @@ app.get("/auth/logout", (req: Request, res: Response) => {
     }
 })
 
-app.get('/getAllFoodTypes', (_, res: Response) => {
-    Food.find().then((result) => {
-        res.send(result)
-    }).catch(err => console.log(err))
-})
-
-app.post('/createFood', (req: Request, _) => {
-    const types = req.body.types
-    const newFood = new Food({
-        types
+app.post('/updateProfile', (req: Request, _) => {
+    const profile = req.body
+    
+    User.findOneAndUpdate({githubId: '25082266'}, {
+        profile: {
+            firstName: profile.firstName,
+            lastName: profile.lastName
+        }
     })
-    newFood.save()
 })
 
 app.listen(4000, () => {

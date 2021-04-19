@@ -1,21 +1,6 @@
 import mongoose from 'mongoose';
 
-const profile = new mongoose.Schema({
-    firstName: {
-        required: false,
-        type: String
-    },
-    lastName: {
-        required: false,
-        type: String
-    }
-});
-
 const user = new mongoose.Schema({
-    generalId: {
-        required: true,
-        type: String
-    },
     googleId: {
         required: false,
         type: String
@@ -40,7 +25,14 @@ const user = new mongoose.Schema({
         required: false,
         type: Boolean
     },
-    profile: profile
+    firstName: {
+        required: false,
+        type: String
+    },
+    lastName: {
+        required: false,
+        type: String
+    }
 });
 
 export default mongoose.model("User", user);

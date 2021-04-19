@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { Account } from './Components/Account/Account';
+import { AccountData } from './Components/Account/account-data/AccountData';
 import { AdminPage } from './Components/Admin/AdminPage';
 import { Help } from './Components/Help/Help';
 import { HomePage } from './Components/Homepage/HomePage';
@@ -20,7 +21,14 @@ export const App: React.FC = () => {
       <Route path='/help' exact component={Help} />
       {!userObject ? <Route path='/login' component={LoginPage} /> : null}
       { userObject?.isAdmin === true ? <Route path='/admin' component={AdminPage} /> : null}
-      {userObject ? <Route path='/account' component={Account} /> : null}
+      {userObject ? 
+      <>
+        <Switch>
+          <Route exact path='/account' component={Account} /> 
+          <Route exact path='/account/data' component={AccountData} /> 
+        </Switch>
+      </>
+      : null}
       <Redirect exact from='/login' to='/' />
     </BrowserRouter>
   )

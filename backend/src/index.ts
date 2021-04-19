@@ -67,7 +67,6 @@ passport.use(new GoogleStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
-                    generalId: uniqid('google-'),
                     googleId: profile.id,
                     username: profile.name.givenName
                 })
@@ -92,7 +91,6 @@ passport.use(new TwitterStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
-                    generalId: uniqid('twitter-'),
                     twitterId: profile.id,
                     username: profile.username
                 })
@@ -119,7 +117,6 @@ passport.use(new GitHubStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
-                    generalId: uniqid('github-'),
                     githubId: profile.id,
                     username: profile.username
                 })
@@ -159,7 +156,6 @@ passport.use(new FacebookStrategy({
             if (!doc) {
                 // Create One
                 const newUser = new User({
-                    generalId: uniqid('facebook-'),
                     facebookId: profile.id,
                     username: profile.displayName
                 })
@@ -235,16 +231,14 @@ app.get("/auth/logout", (req: Request, res: Response) => {
 })
 
 app.post('/updateProfile', (req: Request, _) => {
-    const profile = req.body
-    const user: any = req?.user
-    //TODO: Fix pb on update
-    User.findOneAndUpdate({ generalId: user?.generalId }, {
-        profile: {
-            firstName: profile.firstName,
-            lastName: profile.lastName
-        }
+    const profil = req.body
+    const user: any = req.user
+
+    User.findOneAndUpdate({_id: user._id}, {firstName: profil.firstName, lastName: profil.lastName}, undefined, (err: any, doc: any) => {
+        console.log(err)
     })
 })
+
 
 app.listen(4000, () => {
     console.log('Server started')

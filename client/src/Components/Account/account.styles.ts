@@ -27,17 +27,13 @@ export const css = stylesheet({
         marginLeft: '8px',
         marginRight: '8px',
         borderRadius: '8px',
-        height: '8rem',
-        cursor: 'pointer'
+        height: '8rem'
     },
     row: {
         padding: '1rem 10rem 0 10rem',
         marginTop: '1rem'
     },
-    input: {
-        width: '40rem'
-    },
-    button: {
-        marginLeft: '3rem'
+    link: {
+        textDecoration: 'none'
     }
 })

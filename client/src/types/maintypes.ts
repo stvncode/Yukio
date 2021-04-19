@@ -1,11 +1,11 @@
 export interface IUser {
-    generalId: string;
     googleId?: string;
     twitterId?: string;
     githubId?: string;
     username: string;
     isAdmin?: boolean;
-    profile?: IProfile;
+    firstName?: string;
+    lastName?: string;
     __v: number;
     _id: string;
 }

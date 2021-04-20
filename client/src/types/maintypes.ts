@@ -1,4 +1,5 @@
 export interface IUser {
+    newProfile?: boolean
     googleId?: string
     twitterId?: string
     githubId?: string

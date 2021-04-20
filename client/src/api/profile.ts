@@ -8,3 +8,7 @@ export const updateProfile = (data: IProfile) => {
     }
     axios.post('http://localhost:4000/updateProfile', newProfile, { withCredentials: true })
 }
+
+export const profilAccepted = () => {
+    axios.post('http://localhost:4000/profilAccepted', undefined, { withCredentials: true })
+}

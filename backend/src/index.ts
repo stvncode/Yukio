@@ -68,7 +68,8 @@ passport.use(new GoogleStrategy({
                 // Create One
                 const newUser = new User({
                     googleId: profile.id,
-                    username: profile.name.givenName
+                    username: profile.name.givenName,
+                    newProfile: true
                 })
                 await newUser.save()
                 return cb(null, newUser)
@@ -92,7 +93,8 @@ passport.use(new TwitterStrategy({
                 // Create One
                 const newUser = new User({
                     twitterId: profile.id,
-                    username: profile.username
+                    username: profile.username,
+                    newProfile: true
                 })
                 await newUser.save()
                 return cb(null, newUser)
@@ -118,7 +120,8 @@ passport.use(new GitHubStrategy({
                 // Create One
                 const newUser = new User({
                     githubId: profile.id,
-                    username: profile.username
+                    username: profile.username,
+                    newProfile: true
                 })
                 await newUser.save()
                 return cb(null, newUser)
@@ -157,7 +160,8 @@ passport.use(new FacebookStrategy({
                 // Create One
                 const newUser = new User({
                     facebookId: profile.id,
-                    username: profile.displayName
+                    username: profile.displayName,
+                    newProfile: true
                 })
                 await newUser.save()
                 return cb(null, newUser)
@@ -239,6 +243,13 @@ app.post('/updateProfile', (req: Request, _) => {
     })
 })
 
+app.post('/profilAccepted', (req: Request, _) => {
+    const user: any = req.user
+
+    User.findOneAndUpdate({_id: user._id}, {newProfile: false}, undefined, (err: any, doc: any) => {
+        console.log(err)
+    })
+})
 
 app.listen(4000, () => {
     console.log('Server started')

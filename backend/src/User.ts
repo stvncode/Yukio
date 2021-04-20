@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const user = new mongoose.Schema({
+    newProfile: {
+        required: false,
+        type: Boolean
+    },
     googleId: {
         required: false,
         type: String

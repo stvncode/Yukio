@@ -28,6 +28,12 @@ export const css = stylesheet({
         float: 'left',
         width: '50%'
     },
+    arrow: {
+        marginTop: '2rem',
+        fontSize: '1.5rem',
+        display: 'flex',
+        justifyContent: 'end'
+    },
     rightContainer: {
         float: 'right',
         width: '50%'

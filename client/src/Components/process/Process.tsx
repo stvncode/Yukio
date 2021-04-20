@@ -4,25 +4,13 @@ import { Button } from '../../OwnComponents/button/Button'
 import logo from '../../assets/logo.png'
 import { useTranslator } from '../../hooks/use-translator'
 import { ProcessMsg } from './process.msg'
-import {css} from './process.styles'
-import { Col, Row, Space, Steps } from 'antd'
+import { css } from './process.styles'
+import { Col, Row, Steps } from 'antd'
+import { ArrowLeftOutlined } from '@ant-design/icons'
+import { Process1 } from './Process1'
+import { Process2 } from './Process2'
 
 const { Step } = Steps
-
-const steps = [
-    {
-      title: 'First',
-      content: <div>yoooo</div>,
-    },
-    {
-      title: 'Second',
-      content: 'Second-content',
-    },
-    {
-      title: 'Last',
-      content: 'Last-content',
-    },
-  ]
 
 export const Process: React.FC = () => {
     const msg = useTranslator(ProcessMsg)
@@ -33,13 +21,28 @@ export const Process: React.FC = () => {
         window.location.reload()
     }
 
-      const next = () => {
+    const next = () => {
         setCurrent(current + 1)
-      }
-    
-      const prev = () => {
+    }
+
+    const prev = () => {
         setCurrent(current - 1)
-      }
+    }
+
+    const steps = [
+        {
+            title: 'First',
+            content: <Process1 next={next} />
+        },
+        {
+            title: 'Second',
+            content: <Process2 next={next} />
+        },
+        {
+            title: 'Last',
+            content: 'Last-content',
+        },
+    ]
 
     return (
         <div className={css.container}>
@@ -57,27 +60,30 @@ export const Process: React.FC = () => {
                     </Col>
                 </Row>
             </div>
+            {current > 0 && (
+                <ArrowLeftOutlined className={css.arrow} onClick={() => prev()} />
+            )}
             <div className={css.main}>
                 <div className={css.leftContainer}>{steps[current].content}</div>
                 <div className={css.rightContainer}>
                     {current < steps.length - 1 && (
-                    <Button type="primary" onClick={() => next()}>
-                        Next
-                    </Button>
+                        <Button type="primary" onClick={() => next()}>
+                            Next
+                        </Button>
                     )}
                     {current === steps.length - 1 && (
-                    <Button type="primary">
-                        Done
-                    </Button>
+                        <Button type="primary">
+                            Done
+                        </Button>
                     )}
-                    {current > 0 && (
-                    <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-                        Previous
-                    </Button>
-                    )}
-                    <Button onClick={accepted}>Yooo</Button>
+                    {/* {current > 0 && (
+                        <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+                            Previous
+                        </Button>
+                    )} */}
+                    {/* <Button onClick={accepted}>Yooo</Button> */}
                 </div>
-            </div>    
+            </div>
         </div>
     )
 }

@@ -25,6 +25,8 @@
     "csx": "^10.0.2",
     "formik": "^2.2.6",
     "fp-ts": "^2.9.5",
+    "funfix-core": "^7.0.1",
+    "funfix-exec": "^7.0.1",
     "io-ts": "^2.2.16",
     "io-ts-types": "^0.5.16",
     "lodash.merge": "^4.6.2",

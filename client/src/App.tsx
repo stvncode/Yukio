@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { Account } from './Components/Account/Account';
 import { AccountData } from './Components/Account/account-data/AccountData';
+import { AccountNotifications } from './Components/Account/account-notifications/AccountNotifications';
+import { AccountPoints } from './Components/Account/account-points/AccountPoints';
+import { AccountPrivate } from './Components/Account/account-private/AccountPrivate';
 import { AdminPage } from './Components/Admin/AdminPage';
 import { Help } from './Components/Help/Help';
 import { HomePage } from './Components/Homepage/HomePage';
@@ -26,6 +29,9 @@ export const App: React.FC = () => {
         <Switch>
           <Route exact path='/account' component={Account} /> 
           <Route exact path='/account/data' component={AccountData} /> 
+          <Route exact path='/account/notifications' component={AccountNotifications} /> 
+          <Route exact path='/account/private' component={AccountPrivate} /> 
+          <Route exact path='/account/points' component={AccountPoints} /> 
         </Switch>
       </>
       : null}

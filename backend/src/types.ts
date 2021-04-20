@@ -7,6 +7,13 @@ export interface IUser {
     isAdmin?: boolean,
     firstName?: string,
     lastName?: string,
+    email?: string,
+    phone?: number,
+    gender?: string,
+    address?: string,
+    zipCode?: number,
+    city?: string,
+    age?: number,
     __v: number;
     _id: string;
 }

@@ -30,5 +30,8 @@ export const css = stylesheet({
     profil: {
         display: 'flex',
         justifyContent: 'center'
+    },
+    form: {
+        columns: '2 auto'
     }
 })

@@ -15,11 +15,14 @@ export const classNames = stylesheet({
         fontSize: '1.5rem'
       },
       '.ant-legacy-form-item-label label': {
-        fontSize: '1.5rem',
-        color: palette.mediumGray
+        fontSize: '1.3rem'
       },
       '.ant-legacy-form-item, .ant-legacy-form label': {
         fontSize: '1.5rem'
+      },
+      '.ant-legacy-form-explain': {
+        fontSize: '1rem',
+        color: '#DC3737'
       },
       '&.full-width .ant-legacy-form-item-control-wrapper': {
         width: '100%'

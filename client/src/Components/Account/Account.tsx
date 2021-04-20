@@ -8,6 +8,7 @@ import { UserOutlined, IdcardOutlined, NotificationTwoTone, GiftOutlined } from 
 import { Col, Row } from 'antd'
 import { FaCookieBite } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { joinClasses } from '../../core/styles/classUtils'
 
 export const Account: React.FC = () => {
     const msg = useTranslator(AccountMsg)
@@ -21,10 +22,10 @@ export const Account: React.FC = () => {
             <div>{msg.space}</div>
             <Row gutter={[16, 16]} className={css.row} justify='center'>
                     <Col span={8} className={css.col}>
-                        <Link to='account/data'> 
-                            <div style={{ float: 'left', width: '25%', lineHeight: '8rem', fontSize: '2.5rem', color: '#355CB5' }}><IdcardOutlined /></div>
-                            <div style={{ float: 'right', width: '75%'}}>
-                                <div style={{ fontWeight: 'bold', marginBottom: '1rem', marginTop: '0.2rem' }}>
+                        <Link to='account/data' className={css.link}> 
+                            <div className={joinClasses(css.leftContainer, css.leftColor1)}><IdcardOutlined /></div>
+                            <div className={css.rightContainer}>
+                                <div className={css.title}>
                                     {msg.data}
                                 </div>
                                 <div>{msg.modifyData}</div>
@@ -32,37 +33,37 @@ export const Account: React.FC = () => {
                         </Link>
                     </Col>
                 <Col span={8} className={css.col}>
-                    <div>
-                        <div style={{ float: 'left', width: '25%', lineHeight: '8rem', fontSize: '2.5rem' }}><NotificationTwoTone twoToneColor="#FFC300" /></div>
-                        <div style={{ float: 'right', width: '75%' }}>
-                            <div style={{ fontWeight: 'bold', marginBottom: '0.3rem', marginTop: '0.2rem' }}>
+                <Link to='account/notifications' className={css.link}> 
+                        <div className={css.leftContainer}><NotificationTwoTone twoToneColor="#FFC300" /></div>
+                        <div className={css.rightContainer}>
+                            <div className={css.notifTitle}>
                                 {msg.notifications}
                             </div>
                             <div>{msg.contact}</div>
                         </div>
-                    </div>
+                    </Link>
                 </Col>
                 <Col span={8} className={css.col}>
-                    <div>
-                        <div style={{ float: 'left', width: '25%', lineHeight: '8rem', fontSize: '2.5rem', color: '#873600' }}><FaCookieBite /></div>
-                        <div style={{ float: 'right', width: '75%' }}>
-                            <div style={{ fontWeight: 'bold', marginBottom: '1rem', marginTop: '0.2rem' }}>
+                <Link to='account/private' className={css.link}>
+                        <div className={joinClasses(css.leftContainer, css.leftColor2)}><FaCookieBite /></div>
+                        <div className={css.rightContainer}>
+                            <div className={css.title}>
                                 {msg.private}
                             </div>
                             <div>{msg.cookies}</div>
                         </div>
-                    </div>
+                    </Link>
                 </Col>
                 <Col span={8} className={css.col}>
-                    <div>
-                        <div style={{ float: 'left', width: '25%', lineHeight: '8rem', fontSize: '2.5rem', color: '#C70039' }}><GiftOutlined /></div>
-                        <div style={{ float: 'right', width: '75%' }}>
-                            <div style={{ fontWeight: 'bold', marginBottom: '1rem', marginTop: '0.2rem' }}>
+                <Link to='account/points' className={css.link}>
+                        <div className={joinClasses(css.leftContainer, css.leftColor3)}><GiftOutlined /></div>
+                        <div className={css.rightContainer}>
+                            <div className={css.title}>
                                 {msg.points}
                             </div>
                             <div>{msg.nbrPoints}</div>
                         </div>
-                    </div>
+                    </Link>
                 </Col>
             </Row>
         </div >

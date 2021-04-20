@@ -34,6 +34,36 @@ export const css = stylesheet({
         marginTop: '1rem'
     },
     link: {
+        color: 'black',
         textDecoration: 'none'
+    },
+    leftContainer: {
+        float: 'left', 
+        width: '25%', 
+        lineHeight: '8rem', 
+        fontSize: '2.5rem'
+    },
+    rightContainer: {
+        float: 'right', 
+        width: '75%'
+    },
+    leftColor1: {
+        color: '#355CB5'
+    },
+    leftColor2: {
+        color: '#873600'
+    },
+    leftColor3: {
+        color: '#C70039'
+    },
+    title: {
+        fontWeight: 'bold', 
+        marginBottom: '1rem', 
+        marginTop: '0.2rem'
+    },
+    notifTitle: {
+        fontWeight: 'bold', 
+        marginBottom: '0.3rem', 
+        marginTop: '0.2rem'
     }
 })
